@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Star Wars RPG</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/> -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -12,23 +12,36 @@
 <body>
 
     <!-- Star Wars RPG! header -->
+    <h1>Star Wars RPG!</h1>
 
     <!-- 4 divs for characters, made in jquery -->
     <!-- probably inside a container -->
+    <h2>Character Select</h2>
+    <div class="container" id="charSelect"></div>
 
     <!-- Your Character div -->
+    <h2>Your Character</h2>
+    <div class="container" id="yourChar"></div>
 
     <!-- enemies available to attack div -->
+    <h2>Enemies Available to Attack</h2>
+    <div class="container" id="availableEnemies"></div>
 
     <!-- fight section div-->
+    <h1>Fight Section</h1>
 
     <!-- attack button -->
+    <button id="attackButton">Attack</button>
 
     <!-- defender section div -->
+    <h2>Defender</h2>
+    <div class="container" id="enemyChar"></div>
 
     <!-- combat messages -->
+    <div class="container" id="combatLog"></div>
 
     <!-- a restart button that appears on game over -->
+    <button id="restartButton">Restart</button>
 
 
     <script type="text/javascript" src="assets/javascript/game.js"></script>
