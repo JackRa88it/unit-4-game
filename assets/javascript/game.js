@@ -1,4 +1,4 @@
-// GLOBAL LIBRARY OF CHARACTERS
+// GLOBAL LIBRARY OF CHARACTERS/VARIABLES
 // ----------------------------
 
 // obi-wan object
@@ -29,31 +29,37 @@
     // attack power
     // counter attack power
 
-// chosen character object
+// player char object
     // props created/updated with functions
 
-// enemy character object
+// enemy char object
     // props created/updated with functions
+
+// var playerSelected = false
+// var enemySelected = false
+// var gameOver = false
 
 
 // FUNCTIONS
 // ----------------------------
 
-// initialize game ()
-    // fill the 4 character select divs with base characters
-    // clear other divs (player, available enemies, chosen enemy, combat log)
-    // clear chosen character and chosen enemy object props
+// initialize ()
+    // fill the 4 char select divs with base chars
+    // clear other divs (player char, available enemies, enemy char, combat log)
+    // clear player char and enemy char object props
 
 // player select ()
-    // copy values into chosen character object
-    // clear character select divs
-    // fill chosen character div
+    // copy values into player char object
+    // clear char select divs
+    // fill player char div
     // move other three to fill available enemies divs
+    // playerSelected = true
 
 // enemy select ()
-    // copy values into chosen enemy object
-    // clear chosen enemy from available enemies div
-    // fill chosen enemy div
+    // copy values into enemy char object
+    // clear enemy char from available enemies div
+    // fill enemy char div
+    // enemySelected = true
 
 // attack ()
     // hit enemy for player's attack value
@@ -71,15 +77,17 @@
     
 // game over ()
     // combat log GAME OVER
-    // restart button appears, which calls INITIALIZE
+    // gameOver = true
+    // restart button appears
 
 // enemy defeated ()
-    // clear chosen enemy object props
-    // clear chosen enemy div
+    // clear enemy char object props
+    // clear enemy char div
     // combat log victory
+    // enemySelected = false
     // IF all enemies defeated
+        // call game over function
         // combat log you win
-        // restart button appears, which calls INITIALIZE
 
 
 // CALLS
@@ -87,4 +95,18 @@
 
 // initialize automatically to start with
 
-// (insert all the on click functions with conditionals to control game flow)
+// on click char select divs
+    // IF playerSelected = false
+        // call playerSelect()
+
+// on click available enemies divs
+    // IF playerSelected = true && enemySelected = false
+        // call enemySelect()
+
+// on click attack button
+    // IF playerSelected = true && enemySelected = true
+        // call attack()
+
+// on click restart button
+    // IF gameOver = true
+        // call initialize()
