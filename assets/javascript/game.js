@@ -1,112 +1,313 @@
 // GLOBAL LIBRARY OF CHARACTERS/VARIABLES
 // ----------------------------
 
-// obi-wan object
-    // name
-    // image
-    // HP
-    // attack power
-    // counter attack power
+var obiWan = {
+    name: "Obi-Wan Kenobi",
+    image: "assets/images/obiwan.png",
+    HP: 120,
+    baseAttack: 6,
+    attack: 6,
+    counter: 10,
+};
 
-// luke object
-    // name
-    // image
-    // HP
-    // attack power
-    // counter attack power    
+var luke = {
+    name: "Luke Skywalker",
+    image: "assets/images/luke.jpg",
+    HP: 100,
+    baseAttack: 6,
+    attack: 6,
+    counter: 10,
+};
 
-// darth sidious object
-    // name
-    // image
-    // HP
-    // attack power
-    // counter attack power   
+var darthSidious = {
+    name: "Darth Sidious",
+    image: "assets/images/sidious.jpg",
+    HP: 150,
+    baseAttack: 6,
+    attack: 6,
+    counter: 10,
+};
 
-// darth maul object
-    // name
-    // image
-    // HP
-    // attack power
-    // counter attack power
+var darthMaul = {
+    name: "Darth Maul",
+    image: "assets/images/maul.jpg",
+    HP: 180,
+    baseAttack: 6,
+    attack: 6,
+    counter: 10,
+};
 
-// player char object
-    // props created/updated with functions
-
-// enemy char object
-    // props created/updated with functions
-
-// var playerSelected = false
-// var enemySelected = false
-// var gameOver = false
+var playerChar;
+var enemyChar;
+var playerSelected = false;
+var enemySelected = false;
+var enemiesRemaining;
+var gameIsOver = false;
 
 
 // FUNCTIONS
 // ----------------------------
 
-// initialize ()
-    // fill the 4 char select divs with base chars
-    // clear other divs (player char, available enemies, enemy char, combat log)
-    // clear player char and enemy char object props
+// function pasteDiv(char, type, where) {
+//     var div = $("<div>");
+//     div.attr({"class":type});
+//     div.data(char);
+//     var name = $("<p>");
+//     name.text(char.name);
+//     div.append(name);
+//     var image = $("<img>");
+//     image.attr({src:char.image, alt:"character img"})
+//     div.append(image);
+//     var HP = $("<p>");
+//     HP.text(char.HP);
+//     div.append(HP);
+//     $(where).append(div);
+// };
 
-// player select ()
-    // copy values into player char object
-    // clear char select divs
-    // fill player char div
+
+function initialize() {
+
+    $("#playerSelectContainer").empty();
+    $("#enemySelectContainer").empty();
+    $("#playerCharContainer").empty();
+    $("#enemyCharContainer").empty();
+    $("#combatLog").empty();
+    playerSelected = false;
+    enemySelected = false;
+    gameIsOver = false;
+    $("#restartButton").attr("style","display:none");
+
+    var div = $("<div>");
+    div.attr({"class":"playerSelectChar"});
+    div.data(obiWan);
+    var name = $("<p>");
+    name.text(obiWan.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:obiWan.image, alt:"Obi-Wan img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.text(obiWan.HP);
+    div.append(HP);
+    $("#playerSelectContainer").append(div);
+
+    var div = $("<div>");
+    div.attr("class", "playerSelectChar");
+    div.data(luke);
+    var name = $("<p>");
+    name.text(luke.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:luke.image, alt:"Luke Skywalker img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.text(luke.HP);
+    div.append(HP);
+    $("#playerSelectContainer").append(div);
+
+    var div = $("<div>");
+    div.attr("class", "playerSelectChar");
+    div.data(darthSidious);
+    var name = $("<p>");
+    name.text(darthSidious.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:darthSidious.image, alt:"Darth Sidious img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.text(darthSidious.HP);
+    div.append(HP);
+    $("#playerSelectContainer").append(div);
+
+    var div = $("<div>");
+    div.attr("class", "playerSelectChar");
+    div.data(darthMaul);
+    var name = $("<p>");
+    name.text(darthMaul.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:darthMaul.image, alt:"Darth Maul img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.text(darthMaul.HP);
+    div.append(HP);
+    $("#playerSelectContainer").append(div);
+
+};
+
+function playerSelect(chosen) {
+
+    playerChar = {
+        name: chosen.name,
+        image: chosen.image,
+        HP: chosen.HP,
+        baseAttack: chosen.baseAttack,
+        attack: chosen.attack,
+        counter: chosen.counter,
+    };
+
+    var div = $("<div>");
+    div.attr("id", "playerChar");
+    var name = $("<p>");
+    name.text(playerChar.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:playerChar.image, alt:"Player Char img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.attr("id", "playerHP")
+    HP.text(playerChar.HP);
+    div.append(HP);
+    $("#playerCharContainer").append(div);
+
     // move other three to fill available enemies divs
-    // playerSelected = true
+    $('#playerSelectContainer').children(".playerSelectChar").each(function () {
 
-// enemy select ()
-    // copy values into enemy char object
-    // clear enemy char from available enemies div
-    // fill enemy char div
-    // enemySelected = true
+        var charName = $(this).data();
+        
+        if (charName !== chosen) { 
+            var div = $("<div>");
+            div.attr({"class":"enemySelectChar"});
+            div.data(charName);
+            var name = $("<p>");
+            name.text(charName.name);
+            div.append(name);
+            var image = $("<img>");
+            image.attr({src:charName.image, alt:"Obi-Wan img"})
+            div.append(image);
+            var HP = $("<p>");
+            HP.text(charName.HP);
+            div.append(HP);
+            $("#enemySelectContainer").append(div);
+        };
 
-// attack ()
-    // hit enemy for player's attack value
-    // add base attack value to player attack value
+    });
 
-    // IF enemy health above 0
-        // hit player for enemy's counter attack value
-        // combat log the results
-
-    // IF player health drops to 0 
-        // call game over function
-
-    // IF enemy health drops to 0
-        // call enemy defeated function
+    $("#playerSelectContainer").empty();
     
-// game over ()
-    // combat log GAME OVER
-    // gameOver = true
-    // restart button appears
+    playerSelected = true;
+    enemiesRemaining = 3;
 
-// enemy defeated ()
-    // clear enemy char object props
-    // clear enemy char div
-    // combat log victory
-    // enemySelected = false
-    // IF all enemies defeated
-        // call game over function
-        // combat log you win
+};
+
+function enemySelect(chosen) {
+
+    enemyChar = {
+        name: chosen.name,
+        image: chosen.image,
+        HP: chosen.HP,
+        baseAttack: chosen.baseAttack,
+        attack: chosen.attack,
+        counter: chosen.counter,
+    };
+
+    var div = $("<div>");
+    div.attr("id", "enemyChar");
+    var name = $("<p>");
+    name.text(enemyChar.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:enemyChar.image, alt:"Enemy Char img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.attr("id", "enemyHP")
+    HP.text(enemyChar.HP);
+    div.append(HP);
+    $("#enemyCharContainer").append(div);
+
+    enemySelected = true;
+
+};
+
+function attack() {
+
+    $("#combatLog").empty();
+    enemyChar.HP -= playerChar.attack;
+    $("#combatLog").append("You attacked " + enemyChar.name + " for " + playerChar.attack + " damage. ");
+    playerChar.attack += playerChar.baseAttack;
+
+    if (enemyChar.HP > 0) {
+        playerChar.HP -= enemyChar.counter;
+        $("#combatLog").append(enemyChar.name + " attacked you for " + enemyChar.counter + " damage.");
+    };
+
+    if (playerChar.HP <= 0) {
+        gameOver();
+    };
+
+    if (enemyChar.HP <= 0) {
+        enemyDefeat();
+    }; 
+
+    $("#playerHP").text(playerChar.HP);
+    $("#enemyHP").text(enemyChar.HP);
+
+};
+
+function enemyDefeat() {
+
+    $("#enemyCharContainer").empty();
+    $("#combatLog").text("You have defeated " + enemyChar.name + "!");
+    enemySelected = false;
+    enemiesRemaining--;
+
+    if (enemiesRemaining == 0) {
+        victory();
+    };
+
+};
+
+function gameOver() {
+    gameIsOver = true;
+    $("#combatLog").text("GAME OVER");
+    $("#restartButton").attr("style","display:initial");
+};
+
+function victory() {
+    gameIsOver = true;
+    $("#combatLog").text("You have emerged victorious! Revel in your accomplishment.");
+    $("#restartButton").attr("style","display:initial");
+};
 
 
 // CALLS
 // ----------------------------
 
 // initialize automatically to start with
+initialize();
 
-// on click char select divs
-    // IF playerSelected = false
-        // call playerSelect()
 
-// on click available enemies divs
-    // IF playerSelected = true && enemySelected = false
-        // call enemySelect()
+$("#playerSelectContainer").on("click", ".playerSelectChar", function() {
+    if (playerSelected == false) {
+        playerSelect($(this).data());
+    };
+});
 
-// on click attack button
-    // IF playerSelected = true && enemySelected = true
-        // call attack()
+$("#enemySelectContainer").on("click", ".enemySelectChar", function() {
+    if ((playerSelected == true) && (enemySelected == false)) {
+        enemySelect($(this).data());
+        $(this).remove();
+    };
+});
 
-// on click restart button
-    // IF gameOver = true
-        // call initialize()
+$("#attackButton").on("click", function() {
+    if ((playerSelected == true) && (enemySelected == true) && (gameIsOver == false)) {
+        attack();
+    };
+});
+
+$("#restartButton").on("click", function() {
+    if (gameIsOver == true) {
+        initialize();
+    };
+});
+
+// TUTORING NOTES
+// reduce div pasting into a function with multiple params (chosen, whereToPutIt)
+// make the char divs img alts not all be "obiWan"
+
+// IDEAS
+// wake up in a dark room with only a table and a hooded figure seated opposite
+// you must play a card game to the death
+// animate cards bouncing and flipping
+// animate attack with cards moving towards each other and a flash of light

@@ -1,1 +1,52 @@
 /* stylish shit */
+
+.container {
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.playerSelectChar {
+    float: left;
+    border: 2px solid green;
+    padding: 5px;
+    width: auto;
+    text-align: center;
+    overflow: auto;
+    z-index: 99;
+}
+
+.enemySelectChar {
+    float: left;
+    border: 2px solid red;
+    padding: 5px;
+    width: auto;
+    text-align: center;
+    overflow: auto;
+    z-index: 99;
+}
+
+#playerChar {
+    float: left;
+    border: 2px solid green;
+    padding: 5px;
+    width: auto;
+    text-align: center;
+    overflow: auto;
+}
+
+#enemyChar {
+    float: left;
+    border: 2px solid red;
+    padding: 5px;
+    width: auto;
+    text-align: center;
+    overflow: auto;
+}
+
+img {
+    height: 150px;
+}
+
+#restartButton {
+    display: none;
+}
