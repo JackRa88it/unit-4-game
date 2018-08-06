@@ -48,21 +48,24 @@ var gameIsOver = false;
 // FUNCTIONS
 // ----------------------------
 
-// function pasteDiv(char, type, where) {
-//     var div = $("<div>");
-//     div.attr({"class":type});
-//     div.data(char);
-//     var name = $("<p>");
-//     name.text(char.name);
-//     div.append(name);
-//     var image = $("<img>");
-//     image.attr({src:char.image, alt:"character img"})
-//     div.append(image);
-//     var HP = $("<p>");
-//     HP.text(char.HP);
-//     div.append(HP);
-//     $(where).append(div);
-// };
+function pasteDiv(char, className, containerID) {
+
+    var div = $("<div>");
+    div.attr({"class":className});
+    div.data(char);
+    var name = $("<p>");
+    name.text(char.name);
+    div.append(name);
+    var image = $("<img>");
+    image.attr({src:char.image, alt:"character img"})
+    div.append(image);
+    var HP = $("<p>");
+    HP.attr("class", (className + "HP"))
+    HP.text(char.HP);
+    div.append(HP);
+    $(containerID).append(div);
+
+};
 
 
 function initialize() {
@@ -76,62 +79,10 @@ function initialize() {
     enemySelected = false;
     gameIsOver = false;
     $("#restartButton").attr("style","display:none");
-
-    var div = $("<div>");
-    div.attr({"class":"playerSelectChar"});
-    div.data(obiWan);
-    var name = $("<p>");
-    name.text(obiWan.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:obiWan.image, alt:"Obi-Wan img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.text(obiWan.HP);
-    div.append(HP);
-    $("#playerSelectContainer").append(div);
-
-    var div = $("<div>");
-    div.attr("class", "playerSelectChar");
-    div.data(luke);
-    var name = $("<p>");
-    name.text(luke.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:luke.image, alt:"Luke Skywalker img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.text(luke.HP);
-    div.append(HP);
-    $("#playerSelectContainer").append(div);
-
-    var div = $("<div>");
-    div.attr("class", "playerSelectChar");
-    div.data(darthSidious);
-    var name = $("<p>");
-    name.text(darthSidious.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:darthSidious.image, alt:"Darth Sidious img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.text(darthSidious.HP);
-    div.append(HP);
-    $("#playerSelectContainer").append(div);
-
-    var div = $("<div>");
-    div.attr("class", "playerSelectChar");
-    div.data(darthMaul);
-    var name = $("<p>");
-    name.text(darthMaul.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:darthMaul.image, alt:"Darth Maul img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.text(darthMaul.HP);
-    div.append(HP);
-    $("#playerSelectContainer").append(div);
+    pasteDiv(obiWan, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(luke, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(darthSidious, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(darthMaul, "playerSelectChar", "#playerSelectContainer");
 
 };
 
@@ -146,45 +97,19 @@ function playerSelect(chosen) {
         counter: chosen.counter,
     };
 
-    var div = $("<div>");
-    div.attr("id", "playerChar");
-    var name = $("<p>");
-    name.text(playerChar.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:playerChar.image, alt:"Player Char img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.attr("id", "playerHP")
-    HP.text(playerChar.HP);
-    div.append(HP);
-    $("#playerCharContainer").append(div);
+    pasteDiv(playerChar, "playerChar", "#playerCharContainer");
 
-    // move other three to fill available enemies divs
     $('#playerSelectContainer').children(".playerSelectChar").each(function () {
 
         var charName = $(this).data();
         
         if (charName !== chosen) { 
-            var div = $("<div>");
-            div.attr({"class":"enemySelectChar"});
-            div.data(charName);
-            var name = $("<p>");
-            name.text(charName.name);
-            div.append(name);
-            var image = $("<img>");
-            image.attr({src:charName.image, alt:"Obi-Wan img"})
-            div.append(image);
-            var HP = $("<p>");
-            HP.text(charName.HP);
-            div.append(HP);
-            $("#enemySelectContainer").append(div);
+            pasteDiv(charName, "enemySelectChar", "#enemySelectContainer");
         };
 
     });
 
     $("#playerSelectContainer").empty();
-    
     playerSelected = true;
     enemiesRemaining = 3;
 
@@ -201,20 +126,7 @@ function enemySelect(chosen) {
         counter: chosen.counter,
     };
 
-    var div = $("<div>");
-    div.attr("id", "enemyChar");
-    var name = $("<p>");
-    name.text(enemyChar.name);
-    div.append(name);
-    var image = $("<img>");
-    image.attr({src:enemyChar.image, alt:"Enemy Char img"})
-    div.append(image);
-    var HP = $("<p>");
-    HP.attr("id", "enemyHP")
-    HP.text(enemyChar.HP);
-    div.append(HP);
-    $("#enemyCharContainer").append(div);
-
+    pasteDiv(enemyChar, "enemyChar", "#enemyCharContainer");
     enemySelected = true;
 
 };
@@ -239,8 +151,8 @@ function attack() {
         enemyDefeat();
     }; 
 
-    $("#playerHP").text(playerChar.HP);
-    $("#enemyHP").text(enemyChar.HP);
+    $(".playerCharHP").text(playerChar.HP);
+    $(".enemyCharHP").text(enemyChar.HP);
 
 };
 
@@ -301,10 +213,6 @@ $("#restartButton").on("click", function() {
         initialize();
     };
 });
-
-// TUTORING NOTES
-// reduce div pasting into a function with multiple params (chosen, whereToPutIt)
-// make the char divs img alts not all be "obiWan"
 
 // IDEAS
 // wake up in a dark room with only a table and a hooded figure seated opposite
