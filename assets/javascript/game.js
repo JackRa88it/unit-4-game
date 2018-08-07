@@ -1,36 +1,36 @@
 // GLOBAL LIBRARY OF CHARACTERS/VARIABLES
 // ----------------------------
 
-var obiWan = {
-    name: "Obi-Wan Kenobi",
-    image: "assets/images/obiwan.png",
+var knight = {
+    name: "The Knight",
+    image: "assets/images/swords12knight.jpg",
     HP: 120,
     baseAttack: 6,
     attack: 6,
     counter: 10,
 };
 
-var luke = {
-    name: "Luke Skywalker",
-    image: "assets/images/luke.jpg",
+var knave = {
+    name: "The Fool",
+    image: "assets/images/00fool.jpg",
     HP: 100,
     baseAttack: 6,
     attack: 6,
     counter: 10,
 };
 
-var darthSidious = {
-    name: "Darth Sidious",
-    image: "assets/images/sidious.jpg",
+var emperor = {
+    name: "The Emperor",
+    image: "assets/images/04emperor.jpg",
     HP: 150,
     baseAttack: 6,
     attack: 6,
     counter: 10,
 };
 
-var darthMaul = {
-    name: "Darth Maul",
-    image: "assets/images/maul.jpg",
+var justice = {
+    name: "Justice",
+    image: "assets/images/11justice.jpg",
     HP: 180,
     baseAttack: 6,
     attack: 6,
@@ -54,13 +54,14 @@ function pasteDiv(char, className, containerID) {
     div.attr({"class":className});
     div.data(char);
     var name = $("<p>");
+    name.attr("class","pName")
     name.text(char.name);
     div.append(name);
     var image = $("<img>");
     image.attr({src:char.image, alt:"character img"})
     div.append(image);
     var HP = $("<p>");
-    HP.attr("class", (className + "HP"))
+    HP.attr("class", (className + "HP pHP"))
     HP.text(char.HP);
     div.append(HP);
     $(containerID).append(div);
@@ -74,15 +75,18 @@ function initialize() {
     $("#enemySelectContainer").empty();
     $("#playerCharContainer").empty();
     $("#enemyCharContainer").empty();
-    $("#combatLog").empty();
+    $("#combatLog").text("Choose your champion...");
     playerSelected = false;
     enemySelected = false;
     gameIsOver = false;
+    $("#playerCharContainer").attr("style","display:none");
+    $("#playerSelectContainer").attr("style","display:block");
     $("#restartButton").attr("style","display:none");
-    pasteDiv(obiWan, "playerSelectChar", "#playerSelectContainer");
-    pasteDiv(luke, "playerSelectChar", "#playerSelectContainer");
-    pasteDiv(darthSidious, "playerSelectChar", "#playerSelectContainer");
-    pasteDiv(darthMaul, "playerSelectChar", "#playerSelectContainer");
+    $("#attackButton").attr("style","display:none");
+    pasteDiv(knight, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(knave, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(emperor, "playerSelectChar", "#playerSelectContainer");
+    pasteDiv(justice, "playerSelectChar", "#playerSelectContainer");
 
 };
 
@@ -109,9 +113,12 @@ function playerSelect(chosen) {
 
     });
 
-    $("#playerSelectContainer").empty();
     playerSelected = true;
     enemiesRemaining = 3;
+    $("#playerSelectContainer").empty();
+    $("#playerSelectContainer").attr("style","display:none");
+    $("#playerCharContainer").attr("style","display:block");
+    $("#combatLog").text("Choose your opponent...");
 
 };
 
@@ -128,6 +135,8 @@ function enemySelect(chosen) {
 
     pasteDiv(enemyChar, "enemyChar", "#enemyCharContainer");
     enemySelected = true;
+    $("#attackButton").attr("style","display:block");
+    $("#combatLog").empty();
 
 };
 
@@ -159,12 +168,15 @@ function attack() {
 function enemyDefeat() {
 
     $("#enemyCharContainer").empty();
-    $("#combatLog").text("You have defeated " + enemyChar.name + "!");
     enemySelected = false;
     enemiesRemaining--;
 
     if (enemiesRemaining == 0) {
         victory();
+    }
+
+    else {
+        $("#combatLog").text("You have defeated " + enemyChar.name + "! Choose your next opponent...");
     };
 
 };
@@ -172,13 +184,15 @@ function enemyDefeat() {
 function gameOver() {
     gameIsOver = true;
     $("#combatLog").text("GAME OVER");
-    $("#restartButton").attr("style","display:initial");
+    $("#attackButton").attr("style","display:none");
+    $("#restartButton").attr("style","display:block");
 };
 
 function victory() {
     gameIsOver = true;
     $("#combatLog").text("You have emerged victorious! Revel in your accomplishment.");
-    $("#restartButton").attr("style","display:initial");
+    $("#attackButton").attr("style","display:none");
+    $("#restartButton").attr("style","display:block");
 };
 
 
@@ -219,3 +233,10 @@ $("#restartButton").on("click", function() {
 // you must play a card game to the death
 // animate cards bouncing and flipping
 // animate attack with cards moving towards each other and a flash of light
+
+// TO DO
+// background image (table?)
+// card images
+// card text font
+// switch layout so your cards are at the bottom
+// create separate html files for intro, maybe ending

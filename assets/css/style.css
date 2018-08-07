@@ -1,52 +1,93 @@
 /* stylish shit */
 
+body {
+    background-image: url("../images/stars.jpeg");
+    color: #fff;
+    text-align: center;
+    font-family: 'Vollkorn', serif;
+}
+
 .container {
-    border: 1px solid black;
+    border: 2px solid rgb(22, 11, 0);
     overflow: auto;
-}
-
-.playerSelectChar {
-    float: left;
-    border: 2px solid green;
-    padding: 5px;
     width: auto;
+    margin: 2px auto;
+    height: 225px;
     text-align: center;
-    overflow: auto;
-    z-index: 99;
 }
 
-.enemySelectChar {
-    float: left;
-    border: 2px solid red;
-    padding: 5px;
-    width: auto;
+#combatLog {
+    box-sizing: border-box;
+    height: 54px;
     text-align: center;
-    overflow: auto;
-    z-index: 99;
+    padding: 15px;
+    font-size: 24px;
 }
 
-.playerChar {
-    float: left;
-    border: 2px solid green;
-    padding: 5px;
-    width: auto;
-    text-align: center;
+#mainContent {
+    max-width: 876px;
+    margin: 0 auto;
+    padding: 20px;
     overflow: auto;
+    background-image: url("../images/darkParchment.jpeg");
+    background-size: 100% 100%;
+    border: 5px solid #0e0b09;
+    text-align: center;
 }
 
+.playerSelectChar,
+.enemySelectChar,
+.playerChar,
 .enemyChar {
+    position: relative;
+    background-color: #0e0b09;
+    box-sizing: border-box;
     float: left;
-    border: 2px solid red;
-    padding: 5px;
-    width: auto;
+    border: 2px solid #b38d10;
+    margin: 2px 44px;
+    width: 130px;
     text-align: center;
     overflow: auto;
+    z-index: 99;
+}
+
+.pName {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 10px 0;
+    color: #fff;
+    text-align: center;
+    background: #0e0b09;
+    /* opacity: .5; */
+}
+
+.pHP {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+    color: #fff;
+    text-align: center;
+    background: #0e0b09;
+    /* opacity: .5; */
 }
 
 img {
-    height: 150px;
+    width: 85%;
+    margin-top: 20px;
 }
 
-#restartButton {
-    display: none;
+#restartButton,
+#attackButton {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 10px;
+    background-image: url("../images/darkParchmentRed.jpeg");
+    color: #fff;
+    font-family: 'Vollkorn', serif;
+    font-size: 24px;
+    border: 2px solid rgb(22, 11, 0);
+    box-shadow: 2px 2px 8px #000000;
+    outline: none;
 }

@@ -3,7 +3,8 @@
 <!-- my first RPG! Let's get it on! -->
 <head>
     <meta charset="UTF-8">
-    <title>Star Wars RPG</title>
+    <title>Dueling Cards</title>
+    <link href="https://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -11,36 +12,20 @@
 
 <body>
 
-    <!-- Star Wars RPG! header -->
-    <h1>Star Wars RPG!</h1>
+    <div id="mainContent">        
 
-    <!-- 4 divs for characters, made in jquery -->
-    <!-- probably inside a container -->
-    <h2>Character Select</h2>
-    <div class="container" id="playerSelectContainer"></div>
+        <div class="container" id="enemySelectContainer"></div>
+        
+        <div class="container" id="enemyCharContainer"></div>
 
-    <!-- Your Character div -->
-    <h2>Your Character</h2>
-    <div class="container" id="playerCharContainer"></div>
+        <div class="container" id="playerCharContainer"></div>
 
-    <!-- enemies available to attack div -->
-    <h2>Enemies Available to Attack</h2>
-    <div class="container" id="enemySelectContainer"></div>
+        <div class="container" id="playerSelectContainer"></div>
 
-    <!-- fight section div-->
-    <h1>Fight Section</h1>
+    </div>
 
-    <!-- attack button -->
+    <h1 id="combatLog"></h1>
     <button id="attackButton">Attack</button>
-
-    <!-- defender section div -->
-    <h2>Defender</h2>
-    <div class="container" id="enemyCharContainer"></div>
-
-    <!-- combat messages -->
-    <div class="container" id="combatLog"></div>
-
-    <!-- a restart button that appears on game over -->
     <button id="restartButton">Restart</button>
 
 
