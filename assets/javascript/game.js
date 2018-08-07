@@ -5,34 +5,34 @@ var knight = {
     name: "The Knight",
     image: "assets/images/swords12knight.jpg",
     HP: 120,
-    baseAttack: 6,
+    baseAttack: 8,
     attack: 6,
-    counter: 10,
+    counter: 15,
 };
 
 var knave = {
     name: "The Fool",
     image: "assets/images/00fool.jpg",
     HP: 100,
-    baseAttack: 6,
+    baseAttack: 10,
     attack: 6,
-    counter: 10,
+    counter: 18,
 };
 
 var emperor = {
     name: "The Emperor",
     image: "assets/images/04emperor.jpg",
     HP: 150,
-    baseAttack: 6,
+    baseAttack: 5,
     attack: 6,
-    counter: 10,
+    counter: 12,
 };
 
 var justice = {
     name: "Justice",
     image: "assets/images/11justice.jpg",
     HP: 180,
-    baseAttack: 6,
+    baseAttack: 3,
     attack: 6,
     counter: 10,
 };
